@@ -1,5 +1,7 @@
 package com.semanticsquare.thrillio.managers;
 
+import java.util.List;
+
 import com.semanticsquare.thrillio.dao.UserDao;
 import com.semanticsquare.thrillio.entities.User;
 
@@ -23,7 +25,7 @@ public User createUser(long id,String email,String password,String firstName,Str
 	user.setUserType(userType);
 	return user;
 }
-public User[] getUsers(){
+public List<User> getUsers(){
 	return dao.getUsers();
 }
 

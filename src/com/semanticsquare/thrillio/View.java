@@ -1,5 +1,7 @@
 package com.semanticsquare.thrillio;
 
+import java.util.List;
+
 import com.semanticsquare.thrillio.constant.KidFriendlyStatus;
 import com.semanticsquare.thrillio.constant.UserType;
 import com.semanticsquare.thrillio.controller.BookmarkController;
@@ -8,21 +10,21 @@ import com.semanticsquare.thrillio.entities.User;
 import com.semanticsquare.thrillio.partner.Sharable;
 
 public class View {
-	public static void browse(User user,BookMark[] [] bookmarks) {
+	public static void browse(User user,List<List<BookMark>> bookmarks) {
 		System.out.println("\n"+ user.getEmail()+" is browsing item");
 		
 		int bookmarkCount =0;
-		for(BookMark[] bookmarkList:bookmarks) {
+		for(List<BookMark> bookmarkList:bookmarks) {
 			for(BookMark bookmark:bookmarkList) {
 				//Bookmarkingg
-				if(bookmarkCount<DataStore.USER_BOOKMARK_LIMIT) {
+				//if(bookmarkCount<DataStore.USER_BOOKMARK_LIMIT) {
 					boolean isBookmarked=getBookmarkDecision(bookmark);
 					if(isBookmarked) {
 						bookmarkCount++;
 						BookmarkController.getInstance().SaveUserBookMark(user,bookmark);
 						System.out.println("New Item bookmarked --  "+bookmark);
 					}
-				}
+				//}
 				if(user.getUserType().equals(UserType.EDITOR)||user.getUserType().equals(UserType.CHIEF_EDITOR)) {
 					
 					//mark as kid friendly
@@ -45,7 +47,7 @@ public class View {
 			}
 		}
 		
-	}
+}
 private static boolean getShareDecision() {
 	return Math.random()<0.5?true:false;
 		
@@ -70,4 +72,8 @@ private static String getKidFriendlyStatusDecision(BookMark bookmark) {
 		return Math.random()<0.5?true:false;
 		
 	}
+	//public static void browse(User user, List<List<BookMark>> bookmarks) {
+		// TODO Auto-generated method stub
+		
+	//}
 }
